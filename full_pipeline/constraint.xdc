@@ -4,9 +4,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports clk]
 create_clock -period 10.000 [get_ports clk]
 
 ################ RESET ################
-set_property PACKAGE_PIN J15 [get_ports reset]
+set_property PACKAGE_PIN N17 [get_ports reset]
 set_property IOSTANDARD LVCMOS33 [get_ports reset]
-set_property PULLUP true [get_ports reset]
+##set_property PULLUP true [get_ports reset]
 
 ################ LEDS #################
 # LEDs LD0-LD15

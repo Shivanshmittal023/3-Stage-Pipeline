@@ -2,6 +2,7 @@ module instr_mem (
 	input  wire    	clk,
 	input  wire [31:0] pc, 	// byte address
 	output reg  [31:0] instr
+	//removed reset by Shivansh
 );
 
 	// 1024 words = 4 KB
@@ -12,13 +13,13 @@ module instr_mem (
 	// FPGA ROM initialization
 	// Initialize instruction memory from hex file (simulation / FPGA)
 	initial begin
-    	$readmemh("../mem_generator/imem_dmem/imem.hex", imem);
+    	$readmemh("imem.hex", imem);
 	end
 
 	// Synchronous instruction fetch
 	// Use word-aligned PC (pc[11:2]) to index memory
-	always @(posedge clk) begin
-    	instr <= imem[pc[11:2]];	// word address
+	always @(posedge clk) begin 
+	   instr <= imem[pc[11:2]];	// word address
 	end
 
 endmodule
@@ -45,21 +46,19 @@ module data_mem (
 
 	// Declare data memory array (word-addressable, 4 KB total)
 	// TODO-DMEM-1: Declare dmem
-	(* ram_style = "block" *)
+   (* ram_style = "block" *)
 	reg [31:0] dmem [0:1023];
-
 	// Decode byte address to word index
 	wire [9:0] rindex = raddr[11:2];
 	wire [9:0] windex = waddr[11:2];
 
 	// Simulation / FPGA init
 	// TODO-DMEM-2: Initialize data memory from dmem.hex file
-	initial begin
-    	$readmemh("../mem_generator/imem_dmem/dmem.hex", dmem);
+    initial begin
+    	$readmemh("dmem.hex", dmem);
 	end
-
 	// -------------------------
-	// WRITE + READ (SYNC)
+	// WRITE + READ (SYNC) 
 	// -------------------------
 
 	// Synchronous write and read logic
@@ -72,8 +71,8 @@ module data_mem (
     	if (we) begin
         	if (wstrb[0]) dmem[windex][7:0]   <= wdata[7:0];
         	if (wstrb[1]) dmem[windex][15:8]  <= wdata[15:8];
-        	if (wstrb[2]) dmem[windex][23:16] <= wdata[23:16]; // TODO-DMEM-3
-        	if (wstrb[3]) dmem[windex][31:24] <= wdata[31:24]; // TODO-DMEM-3
+        	if (wstrb[2])dmem[windex][23:16]  <= wdata[23:16]; // TODO-DMEM-3
+        	if (wstrb[3])dmem[windex][31:24]  <= wdata[31:24]; // TODO-DMEM-3
     	end
 
     	// ---- READ (1-cycle latency, RAW-safe) ----
@@ -81,9 +80,9 @@ module data_mem (
         	if (we && (rindex == windex)) begin
             	// Byte-level forwarding
             	rdata[7:0]   <= wstrb[0] ? wdata[7:0]   : dmem[rindex][7:0];
-            	rdata[15:8]  <= wstrb[1] ? wdata[15:8]  : dmem[rindex][15:8];  // TODO-DMEM-3
-            	rdata[23:16] <= wstrb[2] ? wdata[23:16] : dmem[rindex][23:16]; // TODO-DMEM-3
-            	rdata[31:24] <= wstrb[3] ? wdata[31:24] : dmem[rindex][31:24]; // TODO-DMEM-3
+            	rdata[15:8]  <= wstrb[1] ? wdata[15:8]   : dmem[rindex][15:8];// TODO-DMEM-3
+            	rdata[23:16] <= wstrb[2] ? wdata[23:16]   : dmem[rindex][23:16];// TODO-DMEM-3
+            	rdata[31:24] <= wstrb[3] ? wdata[31:24]   : dmem[rindex][31:24];// TODO-DMEM-3
         	end
         	else begin
             	rdata <= dmem[rindex];

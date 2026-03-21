@@ -69,7 +69,6 @@ assign led = pc_disp;
 ////////////////////////////////////////////////////////////
 
 // feed slow clock here
-// PIPELINE CPU
 pipe pipe_u (
 	.clk(slow_clk),
 	.reset(reset),
@@ -82,14 +81,16 @@ pipe pipe_u (
 	.dmem_read_data_temp(dmem_read_data),
 	.dmem_write_valid(dmem_write_valid),
 	.dmem_read_valid(dmem_read_valid),
-	.inst_fetch_pc_pipe(internal_pc),     // FIXED
+	.inst_fetch_pc(internal_pc),
     .inst_mem_address(i_addr),
     .dmem_read_ready(d_read_en),
     .dmem_read_address(d_read_addr),
     .dmem_write_ready(d_write_en),
-    .dmem_write_address(d_write_addr),    // FIXED
+    .dmem_write_addr(d_write_addr),
     .dmem_write_data(d_write_data),
     .dmem_write_byte(d_write_byte)
+	
+// TODO: Might have a few more port signals
 );
 
 

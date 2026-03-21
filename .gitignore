@@ -1,0 +1,57 @@
+# OS Generated Files (Like the ones you just dealt with!)
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# Icarus Verilog (Simulation)
+a.out
+*.vcd
+*.fst
+*.lxt
+*.lxt2
+
+# ModelSim / QuestaSim
+work/
+transcript
+*.wlf
+modelsim.ini
+
+# Xilinx Vivado (Synthesis & Implementation)
+*.jou
+*.log
+*.pb
+*.str
+*.dcp
+*.bit
+*.hwdef
+.Xil/
+project_*/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+
+# Intel Quartus 
+*.qws
+*.rpt
+*.smsg
+*.summary
+*.done
+*.jdi
+*.pin
+*.pof
+*.sof
+db/
+incremental_db/
+output_files/
+
+# Verilator
+obj_dir/
+
+# Text Editor / IDE Temporary Files
+*.swp
+*~
+.vscode/

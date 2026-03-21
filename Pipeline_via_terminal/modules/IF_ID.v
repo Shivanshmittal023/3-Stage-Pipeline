@@ -276,8 +276,8 @@ always @(posedge clk or negedge reset_n) begin
         arithsubtype_o      <= 1'b0;
         pc_o                <= 32'h0;
         src1_sel_o          <= 5'h0;
-        src2_sel_o          <= 1'h0;
-        dest_reg_sel_o      <= 1'h0;
+        src2_sel_o          <= 5'h0;
+        dest_reg_sel_o      <= 3'h0;
         alu_op_o            <= 3'h0;
         illegal_inst_o      <= 1'b0;
     end

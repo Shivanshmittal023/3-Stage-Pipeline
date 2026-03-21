@@ -61,7 +61,7 @@ pipe DUT (
    .inst_mem_is_valid(inst_mem_is_valid),
    .inst_mem_read_data(inst_mem_read_data),
    .inst_mem_address(inst_mem_address),
-   .inst_fetch_pc(inst_fetch_pc),
+   .inst_fetch_pc_pipe(inst_fetch_pc),
 
    // Data Memory Interface
    .dmem_read_data_temp(dmem_read_data),
@@ -70,7 +70,7 @@ pipe DUT (
    .dmem_read_ready(dmem_read_ready),
    .dmem_read_address(dmem_read_address),
    .dmem_write_ready(dmem_write_ready),
-   .dmem_write_addr(dmem_write_addr),
+   .dmem_write_address(dmem_write_addr),
    .dmem_write_data(dmem_write_data),
    .dmem_write_byte(dmem_write_byte)
 );
